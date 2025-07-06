@@ -1,0 +1,8 @@
+// Settings in here override those in "LSP-nimlangserver/LSP-nimlangserver.sublime-settings"
+
+{
+  "binary": "/home/logarius/.nim/bin/nimlangserver",
+  "settings": {
+    "nim.nimsuggestPath": "/home/logarius/.nim/bin/nimsuggest"
+  }
+}

@@ -1,0 +1,429 @@
+{
+  "name": "logarius",
+  "variables": {
+    "redish": "#d47693",
+    "orange": "",
+  },
+  "globals": {
+      "background": "#ededea",
+      "foreground": "#337a93",
+      // 选中行空格显示
+      "invisibles": "#ededea",
+      // 鼠标
+      "caret": "#337a93",
+      "block_caret": "#337a93",
+      // 当前行编号背景色
+      "line_highlight": "#e0d3da",
+      "accent": "#f0e5de",
+      // 弹出窗口（例如代码提示框）
+      // color: 标题颜色
+      "popup_css": "\n      html, body {\n        background-color: #f0e5de;\n        color: #8c8b52;\n        font-family: \"OPPO Sans 4.0\";\n        --mdpopups-font-mono: \"UbuntuMono Nerd Font Mono\";\n        --mdpopups-bg: #f0e5de;\n        --mdpopups-link: #f0e5de;\n      }\n      body {\n        padding: 1px 3px;\n      }\n      a {\n        color: #f3afa2;\n      }\n    ",
+      // 行编号背景色
+      "gutter": "#ededea",
+      "gutter_foreground": "#d1bdc8",
+      "line_diff_width": "4",
+      "line_diff_added": "#4da8b2",
+      "line_diff_modified": "#bebbf6",
+      "line_diff_deleted": "#d47693",
+      // 当前页选中字段的背景色
+      "selection": "#337a93",
+      "selection_foreground": "#ededea",
+      "selection_border": "#337a93",
+      "selection_border_width": "0",
+      // 非当前页选中字段的背景色
+      "inactive_selection": "#337a93",
+      "inactive_selection_foreground": "#ededea",
+      "inactive_selection_border": "#337a93",
+      "selection_corner_style": "round",
+      "selection_corner_radius": "4",
+      // 选中高亮
+      "highlight": "#337a93",
+      "highlight_foreground": "#ededea",
+      // 查找高亮
+      "find_highlight": "#337a93",
+      "find_highlight_foreground": "#ededea",
+      // 对齐引导线
+      "guide": "#e0d3da",
+      "active_guide": "#e0d3da",
+      "stack_guide": "#e0d3da",
+      "shadow": "#2429364d",
+      "shadow_width": "3"
+  },
+  "rules": [{
+          // 注释
+          "name": "Comment",
+          "scope": "comment",
+          "font_style": "italic",
+          "foreground": "#bcc0bf"
+      }, {
+          // 字符串
+          "name": "String",
+          "scope": "string - meta.template, constant.other.symbol, string.quoted",
+          "foreground": "#33846b"
+      }, {
+          // 正则转译字符
+          "name": "Regular Expressions",
+          "scope": "string.regexp, constant.character",
+          "foreground": "#9a6647"
+      }, {
+          // 转义字符
+          "name": "Escape Characters",
+          "scope": "constant.other",
+          "foreground": "#9a6647"
+      },
+      {
+          // 数字
+          "name": "Number",
+          "scope": "constant.numeric",
+          "foreground": "#0a9331"
+      },
+      {
+          // 内置变量, 例如None
+          "name": "Built-in constants",
+          "scope": "constant.language",
+          "foreground": "#bb67c8"
+      },
+      {
+          // TODO: 常量, 深蓝色, 设置为红色会影响错误标识
+          "name": "Constants",
+          "scope": "meta.constant, entity.name.constant",
+          "font_style": "italic",
+          "foreground": "#0004ff"
+      },
+      {
+          // 变量
+          "name": "Variable",
+          "scope": "variable",
+          "foreground": "#337a93"
+      },
+      {
+          // 类变量
+          "name": "Member Variable",
+          "scope": "variable.member",
+          "foreground": "#aa7ea2"
+      },
+      {
+          // self之类的关键字
+          "name": "Language variable",
+          "scope": "variable.language",
+          "font_style": "normal",
+          "foreground": "#b57f78"
+      },
+      {
+          // 内置：比如python的f''
+          "name": "Storage",
+          "scope": "storage, storage.type.keyword",
+          "foreground": "#bb67c8"
+      },
+      {
+          // 关键字
+          "name": "Keyword",
+          "scope": "keyword",
+          "foreground": "#bb67c8"
+      },
+      {
+          // , 光标所在方法下划线
+          "name": "Java keyword fixes",
+          "scope": "source.java meta.class.java meta.class.identifier.java storage.type.java",
+          "font_style": "italic",
+          "foreground": "#337a93"
+      },
+      {
+          // 运算符号，包含not
+          "name": "Operators",
+          "scope": "keyword.operator",
+          "foreground": "#9a96f1"
+      },
+      {
+          "name": "Separators like ; or ,",
+          "scope": "punctuation.separator, punctuation.terminator",
+          "foreground": "#9a96f1"
+      },
+      {
+          // 括号
+          "name": "Punctuation",
+          "scope": "punctuation.section",
+          "foreground": "#9a96f1"
+      },
+      {
+          // .
+          "name": "Accessor",
+          "scope": "punctuation.accessor",
+          "foreground": "#9a96f1"
+      },
+      {
+          // JS/TS插值字符串${}
+          "name": "JavaScript/TypeScript interpolation punctuation",
+          "scope": "punctuation.definition.template-expression",
+          "foreground": "#bb67c8"
+      },
+      {
+          // Ruby插值字符串#{}
+          "name": "Ruby interpolation punctuation",
+          "scope": "punctuation.section.interpolation",
+          "foreground": "#bb67c8"
+      },
+      {
+          // 固定类型
+          "name": "Types fixes",
+          "scope": "source.java storage.type, source.haskell storage.type, source.c storage.type",
+          "foreground": "#bb67c8"
+      },
+      {
+          // 继承类
+          "name": "Inherited class type",
+          "scope": "entity.other.inherited-class",
+          "foreground": "#03968b"
+      },
+      {
+          // 方法声明关键字: def, func
+          "name": "Lambda arrow",
+          "scope": "storage.type.function",
+          "foreground": "#bb67c8"
+      },
+      {
+          // Java原始变量类型
+          "name": "Java primitive variable types",
+          "scope": "source.java storage.type.primitive",
+          "foreground": "#bb67c8"
+      },
+      {
+          // 方法声明名称
+          "name": "Function name",
+          "scope": "entity.name.function",
+          "foreground": "#6b948b"
+      },
+      {
+          // 方法参数
+          "name": "Function arguments",
+          "scope": "variable.parameter, meta.parameter",
+          "foreground": "#4da8b2"
+      },
+      {
+          // 方法调用名称
+          "name": "Function call",
+          "scope": "variable.function, variable.annotation, meta.function-call.generic, support.function.go",
+          "foreground": "#d47693"
+      },
+      {
+          // 类方法, 包括内置方法
+          "name": "Library function",
+          "scope": "support.function, support.macro",
+          "foreground": "#b57f78"
+      },
+      {
+          // 包
+          "name": "Imports and packages",
+          "scope": "entity.name.import, entity.name.package",
+          "font_style": "italic",
+          "foreground": "#a67c9d"
+      },
+      {
+          // 类声明名称
+          "name": "Entity name",
+          "scope": "entity.name, source.js meta.function-call.constructor variable.type",
+          "foreground": "#03968b"
+      },
+      {
+          // HTML, jsx标签
+          "name": "Tag",
+          "scope": "entity.name.tag, meta.tag.sgml",
+          "foreground": "#bb67c8"
+      },
+      {
+          // HTML </></>
+          "name": "Tag start/end",
+          "scope": "punctuation.definition.tag.end, punctuation.definition.tag.begin, punctuation.definition.tag",
+          "foreground": "#9a96f1"
+      },
+      {
+          // CSS类名: .()
+          "name": "Tag attribute",
+          "scope": "entity.other.attribute-name",
+          "foreground": "#03968b"
+      },
+      {
+          // 类常量, 比如JS: JSON.; CSS: flex 
+          "name": "Library constant",
+          "scope": "support.constant",
+          "foreground": "#7d7a56"
+      },
+      {
+          // python的": int"等等
+          "name": "Library class/type",
+          "scope": "support.type, support.class, source.go storage.type",
+          "foreground": "#bb67c8"
+      },
+      {
+          // @注解
+          "name": "Decorators/annotation",
+          "scope": "meta.decorator variable.other, meta.decorator punctuation.decorator, storage.type.annotation, variable.annotation, punctuation.definition.annotation",
+          "foreground": "#bb67c8"
+      },
+      {
+          // 非法字符
+          "name": "Invalid",
+          "scope": "invalid",
+          "foreground": "#ff6aec"
+      },
+      {
+          // 蓝色
+          "name": "diff.header",
+          "scope": "meta.diff, meta.diff.header",
+          "font_style": "italic",
+          "foreground": "#0086ff"
+      },
+      {
+          "name": "Ruby class methods",
+          "scope": "source.ruby variable.other.readwrite",
+          "foreground": "#b57f78"
+      },
+      {
+          // CSS类名: ()没有.
+          "name": "CSS tag names",
+          "scope": "source.css entity.name.tag, source.sass entity.name.tag, source.scss entity.name.tag, source.less entity.name.tag, source.stylus entity.name.tag",
+          "font_style": "normal",
+          "foreground": "#bb67c8"
+      },
+      {
+          // CSS: 某些前缀
+          "name": "CSS browser prefix",
+          "scope": "source.css support.type, source.sass support.type, source.scss support.type, source.less support.type, source.stylus support.type",
+          "foreground": "#b57f78"
+      },
+      {
+          // CSS: 类内部字段名称
+          "name": "CSS Properties",
+          "scope": "support.type.property-name",
+          "font_style": "normal",
+          "foreground": "#337a93"
+      },
+      {
+          // 红色
+          "name": "Search Results Nums",
+          "scope": "constant.numeric.line-number.find-in-files - match",
+          "font_style": "italic",
+          "foreground": "#db2333"
+      },
+      {
+          // 红色
+          "name": "Search Results Match Nums",
+          "scope": "constant.numeric.line-number.match",
+          "font_style": "italic",
+          "foreground": "#db2333"
+      },
+      {
+          // TODO: 红色
+          "name": "Search Results Lines",
+          "scope": "entity.name.filename.find-in-files",
+          "font_style": "italic",
+          "foreground": "#db2333"
+      },
+      {
+          // , 当前光标所在单词的下划线
+          "scope": "message.error",
+          "font_style": "italic",
+          "foreground": "#337a93"
+      },
+      {
+          "name": "Markup heading",
+          "scope": "markup.heading, markup.heading entity.name",
+          "foreground": "#bb67c8"
+      },
+      {
+          "name": "Markup links",
+          "scope": "markup.underline.link, string.other.link",
+          "foreground": "#b57f78",
+          "background": "#ededea"
+      },
+      {
+          "name": "Markup Italic",
+          "scope": "markup.italic",
+          "font_style": "italic",
+          "foreground": "#337a93"
+      },
+      {
+          "name": "Markup Bold",
+          "scope": "markup.bold",
+          "font_style": "bold",
+          "foreground": "#337a93"
+      },
+      {
+          "name": "Markup Bold/italic",
+          "scope": "markup.italic markup.bold, markup.bold markup.italic",
+          "font_style": "bold italic",
+          "foreground": "#337a93"
+      },
+      {
+          "name": "Markup Code",
+          "scope": "markup.raw",
+          "background": "#e0d3da"
+      },
+      {
+          "name": "Markup Code Inline",
+          "scope": "markup.raw.inline",
+          "background": "#e0d3da"
+      },
+      {
+          "name": "Markdown Separator",
+          "scope": "meta.separator",
+          "font_style": "bold",
+          "background": "#ff5000",
+          "foreground": "#bb67c8"
+      },
+      {
+          "name": "Markup Blockquote",
+          "scope": "markup.quote",
+          "foreground": "#337a93",
+          "font_style": "italic"
+      },
+      {
+          "name": "Markup List Bullet",
+          "scope": "markup.list punctuation.definition.list.begin",
+          "foreground": "#337a93"
+      },
+      {
+          "name": "Markup added",
+          "scope": "markup.inserted",
+          "foreground": "#337a93"
+      },
+      {
+          "name": "Markup modified",
+          "scope": "markup.changed",
+          "foreground": "#337a93"
+      },
+      {
+          "name": "Markup removed",
+          "scope": "markup.deleted",
+          "foreground": "#337a93"
+      },
+      {
+          "name": "Markup Strike",
+          "scope": "markup.strike",
+          "foreground": "#337a93"
+      },
+      {
+          "name": "Markup Table",
+          "scope": "markup.table",
+          "background": "#ff5000",
+          "foreground": "#337a93"
+      },
+      {
+          "name": "Markup Raw Inline",
+          "scope": "text.html.markdown markup.inline.raw",
+          "foreground": "#337a93"
+      },
+      {
+          "name": "Markdown - Line Break",
+          "scope": "text.html.markdown meta.dummy.line-break",
+          "background": "#ff5000",
+          "foreground": "#337a93"
+      },
+      {
+          "name": "Markdown - Raw Block Fenced",
+          "scope": "punctuation.definition.markdown",
+          "background": "#ff5000",
+          "foreground": "#337a93"
+      },
+  ]
+}
