@@ -1,0 +1,10 @@
+Args:
+    - icon
+    - time
+    - owner
+    - size
+    - time-type=modified
+    - time-style=locale
+    - format=across
+    - sort=name
+    - theme=/home/logarius/.config/g/pnevma.json
