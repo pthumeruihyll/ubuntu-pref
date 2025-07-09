@@ -1,0 +1,4 @@
+func renderPrompt(io) {
+  var le = io.promptVal('e')
+  return ("$le[38;2;123;21;34mysh ")
+}

@@ -1,0 +1,4 @@
+export PATH="/home/logarius/.python/bin:/home/logarius/.nodejs/bin:/home/logarius/.nim/bin:/home/logarius/.nimble/bin:$PATH"
+export VIRTUAL_ENV_DISABLE_PROMPT='1'
+
+PS1='$(ysh ~/.config/oils/to-osh.ysh osh-prompt-l)'

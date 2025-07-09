@@ -1,0 +1,103 @@
+# 输出bash格式的带颜色的提示符
+# 
+# Parameters
+# ----------
+# psTalks: Str
+#   提示符内容
+# fgArrs: List
+#   长度为3的RGB数组，作为前景颜色
+# bgArrs: List
+#   长度为3的RGB数组，作为背景颜色
+# eIv: Bool
+proc echoColor(psTalks; fgArrs, bgArrs, eIv) {
+  var sFgLe = null
+  var sBgLe = null
+  var rsLe = "$[io.promptVal('e')][0m"
+  var ivLe = "$[io.promptVal('e')][7m"
+  if (type(fgArrs) === 'List' and len(fgArrs) === 3) {
+    var fgOx = join(fgArrs, ';')
+    setvar sFgLe = "$[io.promptVal('e')][38;2;${fgOx}m"
+  }
+  if (type(fgArrs) === 'List' and len(bgArrs) === 3) {
+    var bgOx = join(bgArrs, ';')
+    setvar sBgLe = "$[io.promptVal('e')][48;2;${bgOx}m"
+  }
+
+  if (sBgLe !== null) {
+    setvar psTalks = "${sBgLe}${psTalks}"
+  }
+  if (sFgLe !== null) {
+    setvar psTalks = "${sFgLe}${psTalks}"
+  }
+
+  if (eIv) {
+    setvar psTalks = "${ivLe}${psTalks}"
+  }
+
+  echo "${psTalks}${rsLe}"
+}
+
+# 返回删除用户文件夹路径前缀后的PWD
+#
+# Return
+# ------
+# Str
+#   删除HOME/字符串后的工作路径
+func noTildePwd() {
+  var pwdE = ENV.PWD
+  var homeE = ENV.HOME
+  if (pwdE === homeE) {
+    return ('')
+  }
+  if (pwdE => startsWith(homeE)) {
+    setvar pwdE = pwdE => replace("$[homeE]/", '')
+  }
+  return (pwdE)
+}
+
+# 输出左侧的提示符
+proc oshPromptL() {
+  # 如果是root用户，给出提示
+  var nowRootEcho = ''
+  if ($(id -u) === 0) {
+    setvar nowRootEcho = $(
+      echoColor u'\u{ee02} \u{f095}  ' ([0x39, 0x57, 0x56], [0xc5, 0x68, 0x68], false)
+      ) ++ $(
+      echoColor u'\u{ee02} ' ([0xc5, 0x68, 0x68], [], false)
+      )
+  }
+
+  # PWD
+  var pwdEcho = $(
+    echoColor "$[u'\u{ee02}']$[noTildePwd()] $[u'\u{e5ff} ']" ([0xee, 0xb4, 0xb3], [0x1f, 0x6f, 0x8b], false)
+    ) ++ $(
+    echoColor u'\u{ee01}' ([0x1f, 0x6f, 0x8b], [], false)
+    )
+
+  var oshEcho = $(
+    echoColor u'\u{ee02}OSH \u{f01f} ' ([0x1f, 0x6f, 0x8b], [0xf5, 0xad, 0x92], false)
+    ) ++ $(
+    echoColor u'\u{ee02} ' ([0xf5, 0xad, 0x92], [], false)
+    )
+
+  # python虚拟环境提示符
+  var pyVirEnvEcho = ''
+  if (get(ENV, 'VIRTUAL_ENV_PROMPT', null) !== null) {
+    setvar pyVirEnvEcho = $(
+      echoColor "$[u'\u{ee02}']$[ENV.VIRTUAL_ENV_PROMPT] $[u'\u{ef34} ']" ([0x39, 0x57, 0x56], [0xee, 0xb4, 0xb3], false)
+      )
+    setvar pyVirEnvEcho = pyVirEnvEcho ++ $(
+      echoColor u'\u{ee01}' ([0xee, 0xb4, 0xb3], [], false)
+    )
+  }
+
+  echo $nowRootEcho$pyVirEnvEcho$pwdEcho$oshEcho
+}
+
+# 通过ysh执行脚本
+if (len(ARGV) > 0) {
+  # = ARGV
+  if (ARGV[0] === 'osh-prompt-l') {
+    runproc oshPromptL
+  }
+}
