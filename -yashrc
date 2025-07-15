@@ -1,0 +1,37 @@
+. --autoload --no-alias initialization/common
+
+function oshPromptL () {
+  # 如果是root用户，给出提示
+  if [ "$(id -u)" -eq 0 ]; then
+    printf "\[\e[38;2;57;87;86m\e[48;2;197;104;104m\]  \[\e[0m\]"
+  fi
+
+  if [ -n "${VIRTUAL_ENV_PROMPT:-}" ]; then
+    printf "\[\e[38;2;57;87;86m\e[48;2;238;180;179m\]${VIRTUAL_ENV_PROMPT}  \[\e[0m\e[38;2;238;180;179m\]\[\e[0m\]"
+  fi
+
+  # PWD
+  local pwdE="$PWD"
+  local homeE="$HOME"
+  local pwdEcho=''
+  if [ "$pwdE" != "$homeE" ]; then
+    case "$pwdE" in
+      "$homeE"/*)
+        pwdEcho=${pwdE#$homeE/}
+        ;;
+      *)
+        pwdEcho=$pwdE
+        ;;
+    esac
+  fi
+  printf "\[\e[38;2;238;180;179m\e[48;2;31;111;139m\]${pwdEcho}  \[\e[0m\e[38;2;31;111;139m\]\[\e[0m\]"
+
+  printf "\[\e[38;2;31;111;139m\e[48;2;245;173;146m\]KB  \[\e[0m\e[38;2;245;173;146m\]\[\e[0m\]"
+}
+
+export ECHO_STYLE='SYSV'
+export YASH_PS1='$(oshPromptL)'
+export YASH_PS1R=''
+
+export PATH="$HOME/.python/bin:$HOME/.nodejs/bin:$HOME/.nim/bin:$HOME/.nimble/bin:$PATH"
+export VIRTUAL_ENV_DISABLE_PROMPT='1'

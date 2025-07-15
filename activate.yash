@@ -1,0 +1,65 @@
+# This file must be used with ". bin/activate" from yash of non-POSIXly-correct mode in Linux
+# you cannot run it directly
+
+case $0 in
+  kbsh|yash|-yash)
+    ;;
+  *)
+    echo "You must source this script: . $0" >&2
+    exit 33
+    ;;
+esac
+
+deactivate () {
+  unset -f pydoc >/dev/null 2>&1 || true
+
+  if ! [ -z "${_OLD_VIRTUAL_PATH:+_}" ] ; then
+    PATH="$_OLD_VIRTUAL_PATH"
+    export PATH
+    unset _OLD_VIRTUAL_PATH
+  fi
+  if ! [ -z "${_OLD_VIRTUAL_PYTHONHOME+_}" ] ; then
+    PYTHONHOME="$_OLD_VIRTUAL_PYTHONHOME"
+    export PYTHONHOME
+    unset _OLD_VIRTUAL_PYTHONHOME
+  fi
+
+  if ! [ -z "${_OLD_VIRTUAL_PS1+_}" ] ; then
+    YASH_PS1="$_OLD_VIRTUAL_PS1"
+    export YASH_PS1
+    unset _OLD_VIRTUAL_PS1
+  fi
+
+  unset VIRTUAL_ENV
+  unset VIRTUAL_ENV_PROMPT
+  if [ ! "${1-}" = "nondestructive" ] ; then
+    unset -f deactivate
+  fi
+}
+
+deactivate nondestructive
+
+VIRTUAL_ENV=/home/logarius/.local/share/virtualenvs/zq-gect-CjVunslc
+export VIRTUAL_ENV
+
+_OLD_VIRTUAL_PATH="$PATH"
+PATH="$VIRTUAL_ENV/"bin":$PATH"
+export PATH
+
+if [ "x"zq-gect != x ] ; then
+  VIRTUAL_ENV_PROMPT=zq-gect
+else
+  VIRTUAL_ENV_PROMPT=$(basename "$VIRTUAL_ENV")
+fi
+export VIRTUAL_ENV_PROMPT
+
+if ! [ -z "${PYTHONHOME+_}" ] ; then
+  _OLD_VIRTUAL_PYTHONHOME="$PYTHONHOME"
+  unset PYTHONHOME
+fi
+
+if [ -z "${VIRTUAL_ENV_DISABLE_PROMPT-}" ] ; then
+  _OLD_VIRTUAL_PS1="${YASH_PS1-}"
+  YASH_PS1="(${VIRTUAL_ENV_PROMPT}) ${YASH_PS1-}"
+  export YASH_PS1
+fi
